@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="shortcut icon" href="favicon.ico">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>home | bronn</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f7f8fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            min-height: 100vh;
+            flex-direction: column;
+            justify-content: flex-start;
+            padding-top: 15vh;
+            box-sizing: border-box;
+            overflow-y: auto;
+        }
+
+        .contact-container {
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            margin-top: -20px;
+        }
+
+        .contact-text {
+            font-size: 1rem;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .logo-wrapper {
+            text-align: center;
+            margin-bottom: 0.25rem;
+        }
+
+        .logo {
+            max-width: 600px;
+            width: 70%;
+            height: auto;
+        }
+
+        .rocket-wrapper {
+            text-align: center;
+            margin-bottom: 0.25rem;
+            margin-top: -20px;
+        }
+
+        .rocket-image {
+            max-width: 500px;
+            width: 100%;
+            height: auto;
+            animation: gentle-shake 1s infinite;
+        }
+
+        .contact-link {
+            text-decoration: underline;
+            text-decoration-color: #111;
+            text-decoration-thickness: 3px;
+            color: inherit;
+        }
+
+        .contact-link:hover {
+            font-weight: bold;
+        }
+
+        @keyframes gentle-shake {
+            0% { transform: translate(0.00px, 2.00px) rotate(0.00deg); }
+            10% { transform: translate(1.18px, 1.62px) rotate(0.48deg); }
+            20% { transform: translate(1.90px, 0.62px) rotate(0.29deg); }
+            30% { transform: translate(1.90px, -0.62px) rotate(-0.29deg); }
+            40% { transform: translate(1.18px, -1.62px) rotate(-0.48deg); }
+            50% { transform: translate(0.00px, -2.00px) rotate(-0.00deg); }
+            60% { transform: translate(-1.18px, -1.62px) rotate(0.48deg); }
+            70% { transform: translate(-1.90px, -0.62px) rotate(0.29deg); }
+            80% { transform: translate(-1.90px, 0.62px) rotate(-0.29deg); }
+            90% { transform: translate(-1.18px, 1.62px) rotate(-0.48deg); }
+            100% { transform: translate(-0.00px, 2.00px) rotate(-0.00deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="logo-wrapper">
+        <img src="bronn-coming-soon.png" alt="Logo" class="logo">
+    </div>
+    <div class="rocket-wrapper">
+        <img src="rocket.png" alt="Rocket" class="rocket-image">
+    </div>
+    <div class="contact-container">
+        <p class="contact-text">In the meantime, <a href="mailto:contact@bronn.ai" class="contact-link">contact us</a> to schedule a demo and unlock AI-powered data quality</p>
+    </div>
+</body>
+</html>
