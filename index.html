@@ -184,86 +184,8 @@
 			background: #000;
 		}
 
-		.video-play-overlay {
-			position: absolute;
-			top: 50%;
-			left: 50%;
-			transform: translate(-50%, -50%);
-			width: 80px;
-			height: 80px;
-			border-radius: 50%;
-			background: rgba(0,0,0,0.7);
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			cursor: pointer;
-			z-index: 20;
-			transition: all 0.2s;
-			opacity: 1;
-		}
-
-		.video-play-overlay:hover { 
-			background: rgba(0,0,0,0.8);
-		}
-
-		.video-play-overlay.hidden {
-			opacity: 0;
-			pointer-events: none;
-		}
-
-		.video-play-overlay::after {
-			content: '';
-			display: block;
-			width: 0;
-			height: 0;
-			border-left: 24px solid white;
-			border-top: 12px solid transparent;
-			border-bottom: 12px solid transparent;
-			margin-left: 3px;
-		}
-
-		.modal-close {
-			position: absolute;
-			top: 12px;
-			right: 12px;
-			width: 40px;
-			height: 40px;
-			border-radius: 50%;
-			background: rgba(0,0,0,0.5);
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			cursor: pointer;
-			z-index: 30;
-			transition: background 0.2s;
-			border: none;
-			box-shadow: none;
-		}
-
-		.modal-close:hover {
-			background: rgba(0,0,0,0.7);
-		}
-
-		.modal-close::before, .modal-close::after {
-			content: '';
-			position: absolute;
-			width: 2px;   
-			height: 16px; 
-			background: white;
-			top: 50%;
-			left: 50%;
-			transform: translate(-50%, -50%) rotate(45deg);
-		}
-
-		.modal-close::after {
-			transform: translate(-50%, -50%) rotate(-45deg);
-		}
-
 		@media(max-width:480px) {
 			.modal-content { width: calc(100% - 12px); max-height: calc(100vh - 12px); }
-			.modal-close { width: 40px; height: 40px; line-height: 40px; right: 8px; top: 8px; }
-			.video-play-overlay { width: 60px; height: 60px; }
-			.video-play-overlay::after { border-left: 18px solid white; border-top: 9px solid transparent; border-bottom: 9px solid transparent; }
 		}
 	</style>
 </head>
@@ -291,75 +213,50 @@
 	<!-- Modal -->
 	<div class="modal" id="demoModal" role="dialog" aria-modal="true" aria-hidden="true" tabindex="-1">
 		<div class="modal-content" role="document">
-			<button class="modal-close" id="modalClose" aria-label="Close demo">&times;</button>
-
 			<div class="video-container">
 				<video id="demoVideo" controls playsinline webkit-playsinline preload="metadata">
 					<source src="bronn_demo.mp4" type="video/mp4">
-						Your browser does not support the video tag.
-					</video>
-					<div class="video-play-overlay" id="videoOverlay"></div>
-				</div>
+					Your browser does not support the video tag.
+				</video>
 			</div>
 		</div>
+	</div>
 
-		<script>
-			(function() {
-				const openBtn = document.getElementById('openDemo');
-				const modal = document.getElementById('demoModal');
-				const closeBtn = document.getElementById('modalClose');
-				const video = document.getElementById('demoVideo');
-				const overlay = document.getElementById('videoOverlay');
+	<script>
+		(function() {
+			const openBtn = document.getElementById('openDemo');
+			const modal = document.getElementById('demoModal');
+			const video = document.getElementById('demoVideo');
 
-				function openModal() {
-					modal.style.display = 'flex';
-					modal.setAttribute('aria-hidden', 'false');
-					document.documentElement.style.overflow = 'hidden';
-					document.body.style.overflow = 'hidden';
-					overlay.classList.remove('hidden');
-				}
+			function openModal() {
+				modal.style.display = 'flex';
+				modal.setAttribute('aria-hidden', 'false');
+				document.documentElement.style.overflow = 'hidden';
+				document.body.style.overflow = 'hidden';
+			}
 
-				function closeModal() {
-					modal.style.display = 'none';
-					modal.setAttribute('aria-hidden', 'true');
-					document.documentElement.style.overflow = '';
-					document.body.style.overflow = '';
-					video.pause();
-					video.currentTime = 0;
-					overlay.classList.remove('hidden');
-				}
+			function closeModal() {
+				modal.style.display = 'none';
+				modal.setAttribute('aria-hidden', 'true');
+				document.documentElement.style.overflow = '';
+				document.body.style.overflow = '';
+				video.pause();
+				video.currentTime = 0;
+			}
 
-				function hideOverlay() {
-					overlay.classList.add('hidden');
-				}
+			openBtn.addEventListener('click', openModal);
 
-				function showOverlay() {
-					overlay.classList.remove('hidden');
-				}
+			modal.addEventListener('click', e => {
+				if(e.target === modal) closeModal();
+			});
 
-				openBtn.addEventListener('click', openModal);
-				closeBtn.addEventListener('click', closeModal);
+			const modalContent = modal.querySelector('.modal-content');
+			modalContent.addEventListener('click', e => e.stopPropagation());
 
-				modal.addEventListener('click', e => {
-					if(e.target === modal) closeModal();
-				});
-
-				const modalContent = modal.querySelector('.modal-content');
-				modalContent.addEventListener('click', e => e.stopPropagation());
-
-				overlay.addEventListener('click', () => {
-					video.play();
-					hideOverlay();
-				});
-
-				video.addEventListener('play', hideOverlay);
-
-				video.addEventListener('pause', showOverlay);
-
-				document.addEventListener('keydown', e => {
-					if(e.key === 'Escape' && modal.style.display === 'flex') closeModal();
-				});
-			})();
-		</script>
-	</body>
-	</html>
+			document.addEventListener('keydown', e => {
+				if(e.key === 'Escape' && modal.style.display === 'flex') closeModal();
+			});
+		})();
+	</script>
+</body>
+</html>
